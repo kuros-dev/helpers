@@ -1,0 +1,28 @@
+*{
+    font-family: monospace;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.row *{
+    padding: 3px;
+}
+
+#placeholderY > *:nth-child(even) {
+    background-color: #ddd;
+  }
+
+#placeholderY{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.bold{
+    font-weight: 900;
+    color: darkblue;
+}
