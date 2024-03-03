@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +8,33 @@
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/querySubstractor.js"></script>
     <script>
-        const [keys, values] = substract();
-
         window.onload = () => {
-            var res = '<div class=\"row\""> <p>KEY</p><p>VALUE</p></div>';
-            for (let i = 0; i < keys.length; i++){
-                res += '<div class=\"row\""> <p class=\"bold\"">' + keys[i] +'</p><p>' + values[i]  + '</p></div>'
-            }
-            document.getElementById('placeholderY').innerHTML = res;
+            const bt = document.getElementById("bt");
+
+            bt.addEventListener("click", () => {
+                var variable = document.getElementById("input").value;
+                if (variable == '') {
+                    variable = window.location.href;
+                }
+                const [keys, values] = substract(variable);
+
+                var res = '<div class=\"row\""> <p>KEY</p><p>VALUE</p></div>';
+                for (let i = 0; i < keys.length; i++) {
+                    res += '<div class=\"row\""> <p class=\"bold\"">' + keys[i] + '</p><p>' + values[i] + '</p></div>'
+                }
+                document.getElementById('placeholderY').innerHTML = res;
+            })
         }
+
     </script>
 </head>
+
 <body>
+    <div>
+        <label>link</label><input id="input" class="input_black">
+        <button id="bt" class="button_black">Analyze</button>
+    </div>
     <div id="placeholderY"></div>
 </body>
+
 </html>

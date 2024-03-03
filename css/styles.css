@@ -26,3 +26,31 @@
     font-weight: 900;
     color: darkblue;
 }
+
+.input_black{
+    padding: 5px;
+    width: 55%;
+    border: solid gray 1px;
+    margin-left: 1%;
+    border-radius: 8px;
+}
+
+.button_black{
+    padding: 8px;
+    border-radius: 2000px;
+    border: none;
+    font-weight: 600;
+
+    transition: filter;
+    transition-duration: 0.2s;
+}
+
+.button_black:hover{
+    cursor: pointer;
+    filter: invert(100%);
+}
+
+.button_black:focus{
+
+    filter:blur(40%);
+}
