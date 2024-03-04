@@ -1,33 +1,33 @@
-*{
+* {
     font-family: monospace;
 }
 
-.row{
+.row {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 
-.row *{
+.row * {
     padding: 3px;
 }
 
-#placeholderY > *:nth-child(even) {
+#placeholderY>*:nth-child(even) {
     background-color: #ddd;
-  }
+}
 
-#placeholderY{
+#placeholderY {
     display: flex;
     flex-direction: column;
 
 }
 
-.bold{
+.bold {
     font-weight: 900;
     color: darkblue;
 }
 
-.input_black{
+.input_black {
     padding: 5px;
     width: 55%;
     border: solid gray 1px;
@@ -35,7 +35,7 @@
     border-radius: 8px;
 }
 
-.button_black{
+.button_black {
     padding: 8px;
     border-radius: 2000px;
     border: none;
@@ -45,12 +45,80 @@
     transition-duration: 0.2s;
 }
 
-.button_black:hover{
+.button_black:hover {
     cursor: pointer;
     filter: invert(100%);
 }
 
-.button_black:focus{
+.button_black:focus {
 
-    filter:blur(40%);
+    filter: blur(40%);
+}
+
+.Ylines {
+    border-top: solid rgb(255, 180, 142);
+    border-bottom: solid rgb(255, 180, 142);
+
+    border-radius: 8px;
+}
+
+.underline {
+    border-bottom: solid gray 1px;
+}
+
+.desc {
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    /* Use a monospaced font */
+    border-radius: 5px;
+    /* Optional: Add rounded corners */
+    white-space: pre;
+
+    width: 92%;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.breadcrumb {
+    display: flex;
+    flex-direction: row;
+}
+
+.breadlink_row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.breadcrumb label {
+    padding: 4px;
+    font-weight: 800;
+}
+
+.breadlink {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+    text-decoration: none;
+}
+
+.breadlink:hover {
+    text-decoration: underline;
+    color: rgb(71, 0, 115);
+}
+
+.hbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.hbar input{
+    margin-right: 10px;
 }

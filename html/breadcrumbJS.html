@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/breadcrumb.js"></script>
+    <script>
+        window.onload = () => {
+            const names = createBreadcrumb("/var/www/html", "/")
+            document.getElementById("d").innerHTML = generateBreadcrumbHTML(names);
+
+            // breadcrumb creator section
+
+            document.getElementById("creator").addEventListener("click", () => {
+                var names = createBreadcrumb(document.getElementById("link").value, document.getElementById("split").value);
+
+
+                var split = document.getElementById("split").value
+                var origin = document.getElementById("origin").value
+                var cn = document.getElementById("cn").value
+                var rcn = document.getElementById("rcn").value
+                var sp = document.getElementById("sp").value
+
+                var res = generateBreadcrumbHTML(names);
+                document.getElementById("placeholder").innerHTML = res;
+
+                res = generateBreadcrumbHTML(names, split, origin, cn, rcn, sp);
+                document.getElementById("placeholder2").innerHTML = res;
+
+                document.getElementById("raw").innerHTML = res;
+                document.getElementById("command").innerHTML = "generateBreadcrumbHTML( createBreadcrumb(\"" + document.getElementById("link").value + "\", \"" + split + "\"), \"" + split + "\", \"" + origin + "\", \"" + cn + "\", \"" + rcn + "\", \"" + sp + "\");";
+            })
+
+
+        }   
+    </script>
+</head>
+
+<body>
+    <h1>BREADCRUMB HTML ELEMENTS</h1>
+    <div class="section Ylines">
+        <div class="hbar">
+            Link <input id="link" class="input_black" style="width: 28%;">
+            split <input id="split" class="input_black" style="width: 14px;">
+            origin <input id="origin" class="input_black" style="width: 12%;">
+            classname <input id="cn" class="input_black" style="width: 6%;">
+            row classname <input id="rcn" class="input_black" style="width: 6%;">
+            separator <input id="sp" class="input_black" style="width: 14px;">
+        </div>
+        <button id="creator" class="button_black">CREATE</button>
+
+        default<div id="placeholder"></div>
+        specified<div id="placeholder2"></div>
+        <div id="command"></div>
+        <code>
+            <textarea id="raw" class="desc"></textarea>
+        </code>
+
+    </div>
+    <div class="section Ylines">
+        <h2>How to cast this element:</h2>
+
+        <label>cast this way </label>
+        <p class="underline">generateBreadcrumbHTML(names_array, split_character, origin_URI, classname, row_classname,
+            split(visual))</p>
+
+        <label>you can also cast this way so the other parameters appear as default (split = "/", baseURL = "",
+            classname = "breadcrumb", hrefname = "breadlink", separator = "/")</label>
+        <p class="underline">generateBreadcrumbHTML(names_array)</p>
+
+        <label>this script also includes an auxiliar function to create name arrays </label>
+        <p class="underline">createBreadcrumb("first/second/third", "/")</p>
+    </div>
+
+    <div class="section Ylines">
+        <h2>For example:</h2>
+        <p>Sample: const names = createBreadcrumb("/var/www/html", "/")</p>
+        <div id="d"></div>
+        <h3>Styles for this concrete breadcrumb: </h3>
+        <p class="desc">
+            .breadcrumb {
+            display: flex;
+            flex-direction: row;
+            }
+
+            .breadlink_row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            }
+
+            .breadcrumb label {
+            padding: 4px;
+            font-weight: 800;
+            }
+
+            .breadlink {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: black;
+            text-decoration: none;
+            }
+
+            .breadlink:hover {
+            text-decoration: underline;
+            color: rgb(71, 0, 115);
+            }
+        </p>
+    </div>
+</body>
+
+</html>
