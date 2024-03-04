@@ -60,6 +60,9 @@
     border-bottom: solid rgb(255, 180, 142);
 
     border-radius: 8px;
+
+    padding-bottom: 20px;
+    padding-top: 20px;
 }
 
 .underline {
@@ -121,4 +124,27 @@
 
 .hbar input{
     margin-right: 10px;
+}
+
+.copy{
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+
+    transition: background-color, color;
+    transition-duration: 0.11s;
+    border: none;
+    background-color: rgba(240, 248, 255, 0);
+    border-radius: 1000px;
+}
+
+.copy:hover{
+    background-color: rgb(187, 255, 187);
+    cursor: copy;
+}
+
+.copy:active{
+    background-color: rgb(92, 221, 81);
+    color: white;
+    cursor:crosshair;
 }
