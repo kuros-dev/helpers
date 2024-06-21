@@ -1,11 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Index</title>
+    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <link rel="icon" type="image/x-icon" href="./img/2099103.png">
+    <script src="./js/directoryListing.js"></script>
+    <script src="./js/treeView.js"></script>
+    <style>
+        .attribute{
+            padding: 5px;
+            padding-left: 20px;
+            padding-top: 15px;
+            border-top: solid rgb(100, 100, 100) 2px;
+        }
+    </style>
+    <script>
+        const data2 = {}
+        window.onload = () => {
+            fetchDirectoryListing(window.location, 'php/directory.php', '../', 'json/struct.json')
+            .then(data => {
+                console.log(data);
+                document.getElementById("placeholder").innerHTML = generateTree(data, 2, ['.git']);
+            });
+
+        }
+            
+    </script>
 </head>
+
 <body>
-    
+    <div id="placeholder"></div>
 </body>
+
 </html>

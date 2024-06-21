@@ -1,0 +1,1 @@
+gcc -o name.exe ../scripts/main.c ../scripts/pathfinder.c ../scripts/mazes.c

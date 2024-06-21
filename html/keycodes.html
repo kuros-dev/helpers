@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        onload = () => {
+            document.addEventListener("keydown", (event) => {
+                document.getElementById("numeric").innerHTML = event.key 
+                document.getElementById("keycode").innerHTML = event.key 
+            })
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <label>Numeric</label>
+        <h2 id="numeric"></h2>
+        <br/>
+        <label>keycode</label>
+        <h2 id="keycode"></h2>
+        <br/>
+        <label>other</label>
+        <h2 id="other"></h2>
+        <br/>
+    </div>
+</body>
+</html>
