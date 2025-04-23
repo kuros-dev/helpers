@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Página de Enlaces</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h2 {
+            margin: 0 0 10px;
+            font-size: 1.2em;
+        }
+
+        .card p {
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        .red{
+            background-color: rgb(141, 0, 0);
+            color: white;
+        }
+
+        .blue{
+            background-color: rgb(41, 72, 139);
+            color: white;
+        }
+
+        .green{
+            background-color: rgb(18, 122, 8);
+            color: white;
+        }
+
+        .red p, .blue p, .green p{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Mis Páginas</h1>
+
+    <div class="grid">
+        <a class="card red" href="http://localhost:5173/">
+            <h2>Test</h2>
+            <p>Test ThreeGames (open server locally)</p>
+        </a>
+        <a class="card blue" href="http://127.0.0.1:3000">
+            <h2>VSCode preview</h2>
+            <p>VSCode preview, by default set at root</p>
+        </a>
+        <a class="card" href="https://krunker.io">
+            <h2>Krunker</h2>
+            <p>FPS fast pace</p>
+        </a>
+        <a class="card" href="https://kour.io">
+            <h2>Kour</h2>
+            <p>FPS slower pace, better working</p>
+        </a>
+        <a class="card" href="https://lapalabradeldia.com/">
+            <h2>Wordle</h2>
+            <p>Wordle español</p>
+        </a>
+        <a class="card" href="https://www.newgrounds.com/portal/view/770371">
+            <h2>FNF Web</h2>
+            <p>Friday Night Funkin rythm game</p>
+        </a>
+        <a class="card" href="https://2048game.com/es/">
+            <h2>2048</h2>
+            <p>Puzzle math game</p>
+        </a>
+        <a class="card" href="https://catanuniverse.com/es/game/">
+            <h2>Catan</h2>
+            <p>online catan board game</p>
+        </a>
+    </div>
+
+</body>
+</html>
