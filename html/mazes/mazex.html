@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./st.css">
+    </link>
+    <script src="./script.js"></script>
+    <script>
+        window.onload = () => {
+            let i = 0, j = 0;
+            var targetId = celPos(new Point(CENTER_X, CENTER_Y));
+            var hasSelectedCell = false;
+            var fase = "";
+            let temp2 = {};
+            function drawBoard(dungeon) {
+                let temp1, temp2 = "";
+                temp2 = "<div class=\"game\">";
+                dungeon.forEach(row => {
+                    temp1 = "<div class=\"tablerow\">"
+                    row.forEach(cell => {
+                        temp1 += `<div id=\"cell_${i}_${j}\" class=\"cell ${cell.north ? "n" : ""} ${cell.south ? "s" : ""} ${cell.east ? "e" : ""} ${cell.west ? "w" : ""} unexplored\"></div>`;
+                        j++;
+                    });
+                    temp1 += "</div>";
+                    temp2 += temp1;
+                    i++;
+                    j = 0;
+                });
+                find("tabletop").innerHTML += temp2;
+            }
+
+            function discover(cur) {
+                find(celPos(cur)).classList.remove("unexplored");
+            }
+
+            function celPos(cur) {
+                return `cell_${cur.y}_${cur.x}`;
+            }
+
+
+
+            function enableHoverCells(pos, dungeon) {
+                let temp;
+                if (dungeon[pos.y][pos.x].north) {
+                    enableHelper(pos, 0, -1)
+                }
+
+                if (dungeon[pos.y][pos.x].east) {
+                    enableHelper(pos, 1, 0)
+                }
+
+                if (dungeon[pos.y][pos.x].south) {
+                    enableHelper(pos, 0, 1)
+                }
+
+                if (dungeon[pos.y][pos.x].west) {
+                    enableHelper(pos, -1, 0)
+                }
+
+            }
+
+            function checkExists(pos, addX, addY) {
+
+                if (isWithinBounds(pos.x + addX, pos.y + addY)) {
+                    return false;
+                }
+                return true;
+
+            }
+
+            function dissableHoverCells(pos) {
+                if (dungeon[pos.y][pos.x].north) {
+                    dissableHelper(pos, 0, -1);
+                }
+
+                if (dungeon[pos.y][pos.x].east) {
+                    dissableHelper(pos, 1, 0);
+                }
+
+                if (dungeon[pos.y][pos.x].south) {
+                    dissableHelper(pos, 0, 1);
+                }
+
+                if (dungeon[pos.y][pos.x].west) {
+                    dissableHelper(pos, -1, 0);
+                }
+            }
+
+            function enableHelper(pos, addX = 0, addY = 0) {
+                temp = celPos(new Point(parseInt(pos.x) + addX, parseInt(pos.y) + addY));
+                find(temp).classList.add("hoverSelect");
+                addClickListener(temp);
+            }
+
+            function dissableHelper(pos, addX = 0, addY = 0) {
+                let temp;
+                temp = celPos(new Point(parseInt(pos.x) + addX, parseInt(pos.y) + addY))
+                find(temp).classList.remove("hoverSelect");
+                find(temp).onclick = null;
+            }
+
+            function addClickListener(id) {
+                find(id).onclick = () => {
+                    targetId = id;
+                    hasSelectedCell = true;
+                    fase = "move"
+
+                }
+            }
+
+            function exitTrigger(pos) {
+                let p_x = Number(pos.x);
+                let p_y = Number(pos.y);
+                if (dungeon[p_y][p_x].north) {
+                    if (!isWithinBounds(p_x, p_y - 1)) {
+                        return true;
+                    }
+
+                }
+
+                if (dungeon[p_y][p_x].south) {
+                    if (!isWithinBounds(p_x, p_y + 1)) {
+                        return true;
+                    }
+
+                }
+
+                if (dungeon[p_y][p_x].east) {
+                    if (!isWithinBounds(p_x + 1, p_y)) {
+                        return true;
+                    }
+
+                }
+
+                if (dungeon[p_y][p_x].west) {
+                    if (!isWithinBounds(p_x - 1, p_y)) {
+                        return true;
+                    }
+
+                }
+                return false;
+
+            }
+
+            function spinAnimation() {
+                return 0;
+
+            }
+
+            function cleaning(str) {
+                find(str).innerHTML = '';
+                find(str).onclick = () => { };
+            }
+
+            function clearButtonsCombat() {
+                find("heads").onclick = () => { };
+                find("tails").onclick = () => { };
+            }
+
+            function startGame() {
+                let lifes = MAX_LIFE;
+                let cur = new Point(CENTER_X, CENTER_Y);
+                let combatoption = ""
+                prev = cur;
+
+                find("tabletop").style.display = "block";
+                find("combat_placeholder").style.display = "none";
+
+
+                discover(cur);
+                fase = "cellselect"
+                let gameOver = false;
+
+
+                const executeGame = setInterval(() => {
+                    // fase inicial
+
+                    gameOver = true;
+
+                    switch (fase) {
+                        case "cellselect":
+                            if (dungeon[cur.y][cur.x].combat == 1) {
+                                fase = "combatwait"
+                                find("tabletop").style.display = "none";
+                                find("combat_placeholder").style.display = "block";
+                                dungeon[cur.y][cur.x].combat = 0;
+
+                                find("heads").onclick = () => {
+                                    combatoption = "heads";
+                                    fase = "combat";
+
+                                }
+
+                                find("tails").onclick = () => {
+                                    combatoption = "tails";
+                                    fase = "combat";
+                                }
+                                break;
+                            }
+                            discover(cur);
+                            find(celPos(cur)).innerHTML = `<img src=\"./img/tutel.png\" class=pj></img>`;
+                            if (exitTrigger(cur)) {
+                                alert("EXIT FOUND");
+                                gameOver = true;
+                                clearInterval(executeGame);
+                            }
+                            else {
+                                enableHoverCells(cur, dungeon);
+                                fase = "waiting...";
+                                console.log("current state: " + fase);
+                            }
+
+                            break;
+
+
+                        case "move":
+                            // alert("ha llegado id objetivo = " + targetId);
+                            dissableHoverCells(cur);
+                            find(celPos(cur)).innerHTML = "";
+                            temp2 = targetId.split("_");
+                            cur = new Point(temp2[2], temp2[1]);
+                            fase = "cellselect"
+                            console.log("current state: " + fase);
+                            break;
+
+                        case "combat":
+                            let res = (Math.random() >= 0.5) ? "heads" : "tails";
+
+                            setTimeout(() => {
+                                alert((res == combatoption) ? "YOU WIN" : "YOU LOSE");
+                                // recover
+                                find("tabletop").style.display = "block";
+                                find("combat_placeholder").style.display = "none";
+
+                                fase = "cellselect"
+
+                            }, 1000);
+                            fase = "wait";
+                            break;
+
+
+
+                        case "combatwait":
+
+                            break;
+
+                        default:
+                            break;
+
+                    }
+                }, 50)
+
+            }
+
+            drawBoard(dungeon);
+
+            startGame();
+        }
+    </script>
+</head>
+
+<body>
+    <div id="tabletop">
+
+    </div>
+    <div id="combat_placeholder">
+        <div class="jail">
+            <div class="team1">
+                <div id="turtle">
+                    <img src="./img/tutel.png" alt="">
+                </div>
+                <div id="dirt1">
+                    <img src="./img/mud_2.png" alt="">
+                </div>
+            </div>
+            <div class="team2">
+                <div id="crab">
+                    <img src="./img/crab.png" alt="">
+                </div>
+                <div id="dirt2">
+                    <img src="./img/mud_1.png" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <button class="bt_play" id="heads">HEADS</button>
+            <button class="bt_play" id="tails">TAILS</button>
+        </div>
+
+    </div>
+    <div id="logdata">
+    </div>
+
+</body>
+
+</html>

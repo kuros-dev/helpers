@@ -1,0 +1,120 @@
+body{
+    align-items: center;
+}
+
+.cell {
+    width: 55px;
+    height: 55px;
+    border: solid black 4px;
+    border-radius: 3px;
+    background-color: white;
+    display: flex;
+  justify-content: center; /* Centrado horizontal */
+  align-items: center;    
+}
+
+.tablerow {
+    display: flex;
+    flex-direction: row;
+}
+
+.game {
+    display: flex;
+    flex-direction: column;
+
+    background-color: black;
+    width: fit-content;
+    height: fit-content;
+}
+
+.unexplored {
+    background-color: gray;
+    border-color: gray;
+}
+
+.n {
+    border-top-color: rgba(235, 235, 235, 0);
+}
+
+.s {
+    border-bottom-color: rgba(225, 225, 225, 0);
+}
+
+.e {
+    border-right-color: rgba(225, 225, 225, 0);
+}
+
+.w {
+    border-left-color: rgba(225, 225, 225, 0);
+}
+
+.unexplored {
+    /* border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    background-color: rgb(29, 29, 29); */
+}
+
+.pj {
+    width: 40px;
+    height: 40px;
+}
+
+.hoverSelect {
+    background-color: green;
+    border-color: rgba(225, 225, 225, 0);
+    transition: 0.125s;
+}
+
+.hoverSelect:hover {
+    transform: scale(115%);
+}
+
+.bt_play{
+    background-color:beige;
+    width: 120px;
+    height: 55px;
+    border: none;
+    border-radius: 8px;
+}
+
+.bt_play:hover {
+    cursor: pointer;
+}
+
+#heads:hover{
+    background-color: green;
+}
+
+#tails:hover{
+    background-color: yellowgreen;
+}
+
+#combat_placeholder{
+    display: flex;
+    flex-direction: column;
+}
+
+.jail{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 300px;
+}
+
+@keyframes shake {
+    0%   { transform: translateX(0); }
+    10%  { transform: translateX(12px); }
+    20%  { transform: translateX(8px); }
+    30%  { transform: translateX(-10px); }
+    40%  { transform: translateX(10px); }
+
+    50%  { transform: translateX(-12px); }
+    60%  { transform: translateX(12px); }
+    70%  { transform: translateX(-20px); }
+    80%  { transform: translateX(14px); }
+    90%  { transform: translateX(-16px); }
+
+    100% { transform: translateX(0); }
+}
